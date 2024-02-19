@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Preview</title>
+  <style>
+    .image-container img {
+      width: 300px;
+      height: 300px;
+    }
+    #image {
+      width: 800px;
+      height: 800px;
+      background-size: cover;
+      background-position: center;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="image-container">
+    <img src="C:\Users\giang\OneDrive\Pictures\VS code\1.jpg" alt="Placeholder 1">
+    <img src="C:\Users\giang\OneDrive\Pictures\VS code\2.jpg" alt="Placeholder 2">
+    <img src="C:\Users\giang\OneDrive\Pictures\VS code\3.jpg" alt="Placeholder 3">
+  </div>
+  <div id="image">Hover over an image below to display here.</div>
+  <button onclick="undo()">Undo</button>
+  <script>
+    const images = document.querySelectorAll('.image-container img');
+    images.forEach(image => {
+      image.addEventListener('mouseover', () => {
+        upDate(image);
+      });
+      image.addEventListener('mouseout', () => {
+        undo();
+      });
+    });
+
+    function upDate(previewPic) {
+      console.log('Event triggered');
+      console.log(previewPic);
+      
+      // Change the text of the element with the id of 'image'
+      document.getElementById('image').textContent = `Image: ${previewPic.alt}`;
+      
+      // Change the background image of the element with the id of 'image'
+      document.getElementById('image').style.backgroundImage = `url(${previewPic.src})`;
+    }
+
+    function undo() {
+      // Reset the background image of the div with the id of 'image' back to the original value
+      document.getElementById('image').style.backgroundImage = '';
+      
+      // Reset the text of the div with the id of 'image' back to the original text
+      document.getElementById('image').textContent = 'Hover over an image below to display here.';
+    }
+  </script>
+</body>
+</html>
